@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Ukur: Pengukuran Panjang dan Berat | SD/MI Kelas IV</title>
+    
+    <!-- Google Fonts: Fredoka & Nunito (Rounded Sans-Serif Ramah Anak) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===================================================
+           1. PALET WARNA & VARIABLE CSS (Bright Pastel)
+           =================================================== */
+        :root {
+            --bg-offwhite: #FFFDF8;
+            --sun-yellow: #FFC048;
+            --sun-yellow-shadow: #E1A200;
+            --sky-blue: #4BC2E6;
+            --sky-blue-shadow: #2AA1C5;
+            --mint-green: #2ECE9D;
+            --mint-green-shadow: #1FB386;
+            --soft-orange: #FF7D54;
+            --soft-orange-shadow: #E25E35;
+            --card-bg: #FFFFFF;
+            --text-dark: #2D3436;
+            --text-muted: #636E72;
+            --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.06);
+            --radius-card: 20px;
+            --radius-pill: 50px;
+            --font-family: 'Nunito', 'Fredoka', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-offwhite);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* ===================================================
+           2. HEADER & NAVBAR
+           =================================================== */
+        .app-header {
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .brand-logo .mascot-icon {
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .brand-logo h1 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.3rem;
+            color: var(--soft-orange);
+            line-height: 1.1;
+        }
+
+        .brand-logo h1 small {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--sky-blue);
+        }
+
+        .sound-toggle-btn {
+            background: #F0F3F6;
+            border: none;
+            padding: 8px 14px;
+            border-radius: var(--radius-pill);
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===================================================
+           3. CONTAINER & SPA SECTION SYSTEM
+           =================================================== */
+        .main-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 16px;
+        }
+
+        .spa-section {
+            display: none;
+            animation: fadeIn 0.4s cubic-bezier(0.39, 0.575, 0.565, 1);
+        }
+
+        .spa-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+
+        /* ===================================================
+           4. TOMBOL 3D / PILL SHAPED
+           =================================================== */
+        .btn-3d {
+            border: none;
+            padding: 12px 26px;
+            border-radius: var(--radius-pill);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-yellow {
+            background-color: var(--sun-yellow);
+            color: #4A3B00;
+            box-shadow: 0 5px 0 var(--sun-yellow-shadow);
+        }
+        .btn-yellow:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--sun-yellow-shadow); }
+        .btn-yellow:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--sun-yellow-shadow); }
+
+        .btn-blue {
+            background-color: var(--sky-blue);
+            color: #FFFFFF;
+            box-shadow: 0 5px 0 var(--sky-blue-shadow);
+        }
+        .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--sky-blue-shadow); }
+        .btn-blue:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--sky-blue-shadow); }
+
+        .btn-mint {
+            background-color: var(--mint-green);
+            color: #FFFFFF;
+            box-shadow: 0 5px 0 var(--mint-green-shadow);
+        }
+
+        .btn-back {
+            background: #EFEFEF;
+            border: none;
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ===================================================
+           5. CARD DESIGN
+           =================================================== */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-card);
+            padding: 24px;
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 20px;
+            border: 2px solid rgba(0,0,0,0.03);
+        }
+
+        /* HALAMAN A: WELCOME / LOGIN */
+        .welcome-card {
+            text-align: center;
+            max-width: 460px;
+            margin: 30px auto;
+        }
+
+        .mascot-avatar-big {
+            font-size: 4.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: float 2.5s ease-in-out infinite;
+        }
+
+        .welcome-card h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--soft-orange);
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-top: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--sky-blue);
+        }
+
+        .avatar-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+
+        .avatar-grid input { display: none; }
+        .avatar-grid span {
+            font-size: 2.2rem;
+            padding: 8px 12px;
+            border: 2px solid #E2E8F0;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .avatar-grid input:checked + span {
+            border-color: var(--soft-orange);
+            background-color: #FFF2ED;
+            transform: scale(1.1);
+        }
+
+        /* HALAMAN B: DASHBOARD */
+        .dashboard-banner {
+            background: linear-gradient(135deg, #E3F8FF, #FFF4D9);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .greeting h2 {
+            font-family: 'Fredoka', sans-serif;
+            color: var(--soft-orange);
+            font-size: 1.6rem;
+        }
+
+        .progress-box {
+            background: #FFFFFF;
+            padding: 12px 18px;
+            border-radius: 16px;
+            min-width: 220px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+        }
+
+        .progress-bar-bg {
+            background-color: #E2E8F0;
+            height: 12px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 6px 0;
+        }
+
+        .progress-bar-fill {
+            background-color: var(--mint-green);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 3px solid transparent;
+            text-align: center;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--sun-yellow);
+        }
+
+        .menu-icon { font-size: 2.8rem; margin-bottom: 8px; }
+
+        /* HALAMAN C: MATERI (TABBED) */
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            padding-bottom: 4px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius-pill);
+            background: #EFEFEF;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            background-color: var(--soft-orange);
+            color: #FFFFFF;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .materi-badge {
+            background: var(--sky-blue);
+            color: #FFF;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .grid-3col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 16px 0;
+        }
+
+        .materi-item-box {
+            background: #F8FAFC;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #E2E8F0;
+        }
+
+        .materi-item-box .item-emoji { font-size: 2.5rem; margin-bottom: 6px; }
+
+        .formula-box, .example-box {
+            background: #FFF9E6;
+            border-left: 5px solid var(--sun-yellow);
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin: 14px 0;
+        }
+
+        .mini-check {
+            background: #E8F8F5;
+            border: 2px dashed var(--mint-green);
+            padding: 16px;
+            border-radius: 16px;
+            margin-top: 18px;
+        }
+
+        .mini-check-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .mini-check-options button {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--mint-green);
+            border-radius: 12px;
+            background: #FFFFFF;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .mini-feedback {
+            margin-top: 8px;
+            font-weight: 800;
+        }
+
+        /* HALAMAN D: AKTIVITAS GAMES */
+        .game-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+            padding-bottom: 6px;
+        }
+
+        .game-tab-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: var(--radius-pill);
+            background: #EFEFEF;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .game-tab-btn.active {
+            background-color: var(--sun-yellow);
+            color: #4A3B00;
+        }
+
+        .drag-items-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .draggable-card {
+            background: var(--sun-yellow);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--sun-yellow-shadow);
+            display: inline-block;
+        }
+
+        .drop-baskets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .drop-basket {
+            min-height: 120px;
+            border: 3px dashed var(--sky-blue);
+            border-radius: 16px;
+            padding: 12px;
+            text-align: center;
+            background: #F0FBFF;
+        }
+
+        /* HALAMAN E: KUIS EVALUASI */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .quiz-opt-btn {
+            background: #FFFFFF;
+            border: 2px solid #E2E8F0;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .quiz-opt-btn:hover {
+            border-color: var(--sky-blue);
+            background-color: #F0FBFF;
+        }
+
+        /* RAPOR & BADGES */
+        .badges-container {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .badge-card {
+            background: #FFFFFF;
+            border: 2px solid #E2E8F0;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            flex: 1;
+            opacity: 0.4;
+        }
+
+        .badge-card.unlocked {
+            border-color: var(--sun-yellow);
+            background: #FFFDF0;
+            opacity: 1;
+        }
+
+        .badge-icon { font-size: 2.8rem; }
+
+        /* MODAL FEEDBACK */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #FFFFFF;
+            padding: 28px;
+            border-radius: var(--radius-card);
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.7); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-icon { font-size: 3.5rem; display: block; margin-bottom: 6px; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 600px) {
+            .dashboard-banner { flex-direction: column; align-items: flex-start; }
+            .grid-3col { grid-template-columns: 1fr; }
+            .drop-baskets-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / NAVBAR -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-logo" onclick="navigateTo('dashboard')">
+                <span class="mascot-icon">🐱🕵️‍♂️</span>
+                <h1>Misi Ukur <small>Bersama Si Kiko</small></h1>
+            </div>
+            <button class="sound-toggle-btn" id="btnSoundToggle" onclick="toggleSound()">
+                <span id="soundIcon">🔊</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN SINGLE PAGE APPLICATION CONTAINER -->
+    <main class="main-container">
+
+        <!-- HALAMAN A: LOGIN / WELCOME SCREEN -->
+        <section id="sec-login" class="spa-section active">
+            <div class="card welcome-card">
+                <span class="mascot-avatar-big">🐱🕵️‍♂️</span>
+                <h2>Misi Ukur Si Kiko!</h2>
+                <p>Halo! Bantu <strong>Si Kiko</strong> menyelesaikan Misi Pengukuran Panjang dan Berat, yuk!</p>
+                
+                <form id="formLogin" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="inputNama">Nama Lengkap Kamu:</label>
+                        <input type="text" id="inputNama" placeholder="Ketik namamu di sini..." required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="selectKelas">Pilih Kelas:</label>
+                        <select id="selectKelas">
+                            <option value="4A">Kelas 4A SD/MI</option>
+                            <option value="4B">Kelas 4B SD/MI</option>
+                            <option value="4C">Kelas 4C SD/MI</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pilih Avatar Karakter:</label>
+                        <div class="avatar-grid">
+                            <label><input type="radio" name="avatar" value="🐱" checked> <span>🐱</span></label>
+                            <label><input type="radio" name="avatar" value="🐶"> <span>🐶</span></label>
+                            <label><input type="radio" name="avatar" value="🦊"> <span>🦊</span></label>
+                            <label><input type="radio" name="avatar" value="🐼"> <span>🐼</span></label>
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn-3d btn-yellow" style="width: 100%;">Mulai Petualangan! 🚀</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- HALAMAN B: DASHBOARD -->
+        <section id="sec-dashboard" class="spa-section">
+            <div class="card dashboard-banner">
+                <div class="greeting">
+                    <h2>Halo, <span id="dashUserName">Detektif</span>! <span id="dashUserAvatar">🐱</span></h2>
+                    <p>Si Kiko siap menemanimu belajar hari ini. Pilih menu di bawah ini ya!</p>
+                </div>
+                <div class="progress-box">
+                    <span>Progress Kuis:</span>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="dashProgressFill"></div>
+                    </div>
+                    <small id="dashProgressText">Belum ada nilai kuis</small>
+                </div>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card" onclick="navigateTo('materi')">
+                    <div class="menu-icon">📚</div>
+                    <h3>Modul Materi</h3>
+                    <p>Pelajari Pengukuran Panjang & Berat</p>
+                </div>
+                <div class="menu-card" onclick="navigateTo('aktivitas')">
+                    <div class="menu-icon">🎮</div>
+                    <h3>Aktivitas Belajar</h3>
+                    <p>5 Mini Game Interaktif Seru</p>
+                </div>
+                <div class="menu-card" onclick="navigateTo('kuis')">
+                    <div class="menu-icon">📝</div>
+                    <h3>Kuis Evaluasi</h3>
+                    <p>Uji Kemampuanmu (10 Soal HOTS)</p>
+                </div>
+                <div class="menu-card" onclick="navigateTo('rapor')">
+                    <div class="menu-icon">🏆</div>
+                    <h3>Rapor & Badges</h3>
+                    <p>Lihat Nilai & Lencana Prestasimu</p>
+                </div>
+                <div class="menu-card" onclick="navigateTo('petunjuk')">
+                    <div class="menu-icon">💡</div>
+                    <h3>Petunjuk Main</h3>
+                    <p>Cara menggunakan media ini</p>
+                </div>
+                <div class="menu-card" onclick="navigateTo('tentang')">
+                    <div class="menu-icon">ℹ️</div>
+                    <h3>Tentang Media</h3>
+                    <p>Pengembang & Kurikulum SD</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN C: MATERI PEMBELAJARAN -->
+        <section id="sec-materi" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            <h2>📚 Modul Materi Pembelajaran</h2>
+            <br>
+
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="switchMateriTab('panjang')">📏 Pengukuran Panjang</button>
+                <button class="tab-btn" onclick="switchMateriTab('berat')">⚖️ Pengukuran Berat</button>
+                <button class="tab-btn" onclick="switchMateriTab('cerita')">📖 Soal Cerita</button>
+            </div>
+
+            <!-- TAB MATERI A: PANJANG -->
+            <div id="tab-panjang" class="tab-content active">
+                <div class="card">
+                    <span class="materi-badge">Materi 1</span>
+                    <h3>Alat Ukur Panjang Baku</h3>
+                    <p>Alat ukur baku digunakan agar hasil pengukuran selalu sama dan akurat.</p>
+                    
+                    <div class="grid-3col">
+                        <div class="materi-item-box">
+                            <div class="item-emoji">📏</div>
+                            <h4>Penggaris (cm & mm)</h4>
+                            <p>Untuk mengukur benda pendek & lurus.<br><em>Contoh: Buku, pensil, penghapus.</em></p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">🛠️</div>
+                            <h4>Meteran Saku (m & cm)</h4>
+                            <p>Untuk bidang datar yang lebih panjang.<br><em>Contoh: Meja, tinggi pintu, keramik.</em></p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">🎗️</div>
+                            <h4>Meteran Kain / Pita (cm)</h4>
+                            <p>Lentur/fleksibel untuk bidang melengkung.<br><em>Contoh: Lingkar pinggang, lingkar kepala.</em></p>
+                        </div>
+                    </div>
+
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Budi ingin mengukur lingkar dadanya untuk membuat seragam. Alat mana yang paling tepat?</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. Penggaris</button>
+                            <button onclick="checkMini(this, true)">B. Meteran Kain</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="materi-badge">Materi 2</span>
+                    <h3>Hubungan Antarsatuan Panjang (m & cm)</h3>
+                    <p>Urutan tangga satuan: <strong>km - hm - dam - m - dm - cm - mm</strong></p>
+                    <div class="formula-box">
+                        <p>⬇️ Setiap turun 1 tingkat = <strong>Dikali 10 (x10)</strong></p>
+                        <p>⬆️ Setiap naik 1 tingkat = <strong>Dibagi 10 (:10)</strong></p>
+                        <hr style="margin: 8px 0;">
+                        <p>🎯 <strong>1 meter (m) = 100 sentimeter (cm)</strong> (Turun 2 tangga: m ➔ dm ➔ cm)</p>
+                        <p>🎯 <strong>100 sentimeter (cm) = 1 meter (m)</strong></p>
+                    </div>
+                    <div class="example-box">
+                        <strong>Contoh Konversi:</strong>
+                        <ul>
+                            <li>3 m = 3 x 100 cm = <strong>300 cm</strong></li>
+                            <li>500 cm = 500 : 100 = <strong>5 m</strong></li>
+                            <li>2 m 45 cm = 200 cm + 45 cm = <strong>245 cm</strong></li>
+                        </ul>
+                    </div>
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Tinggi tiang bendera adalah 4 m. Jika diubah ke dalam sentimeter (cm), nilainya adalah...</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. 40 cm</button>
+                            <button onclick="checkMini(this, true)">B. 400 cm</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="materi-badge">Materi 3</span>
+                    <h3>Pembulatan Hasil Pengukuran Panjang</h3>
+                    <p>Aturan pembulatan ke cm terdekat berdasarkan angka milimeter (mm) di belakang koma:</p>
+                    <div class="formula-box">
+                        <p>🔴 Jika angka di belakang koma <strong>&lt; 5 (0, 1, 2, 3, 4)</strong> ➔ Bulatkan <strong>KE BAWAH</strong> (angka cm tetap).</p>
+                        <p>🟢 Jika angka di belakang koma <strong>≥ 5 (5, 6, 7, 8, 9)</strong> ➔ Bulatkan <strong>KE ATAS</strong> (tambah 1 ke cm).</p>
+                    </div>
+                    <div class="example-box">
+                        <p>✏️ Panjang pensil 8,3 cm ➔ Angka belakang koma 3 (&lt; 5) ➔ dibulatkan jadi <strong>8 cm</strong>.</p>
+                        <p>🧹 Panjang penghapus 4,7 cm ➔ Angka belakang koma 7 (≥ 5) ➔ dibulatkan jadi <strong>5 cm</strong>.</p>
+                    </div>
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Panjang sebuah spidol adalah 12,6 cm. Pembulatan ke cm terdekat adalah...</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. 12 cm</button>
+                            <button onclick="checkMini(this, true)">B. 13 cm</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB MATERI B: BERAT -->
+            <div id="tab-berat" class="tab-content">
+                <div class="card">
+                    <span class="materi-badge">Materi 1</span>
+                    <h3>Alat Ukur Berat (Timbangan Baku)</h3>
+                    <div class="grid-3col">
+                        <div class="materi-item-box">
+                            <div class="item-emoji">⚖️</div>
+                            <h4>Timbangan Badan (kg)</h4>
+                            <p>Mengukur berat tubuh manusia.</p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">🦆</div>
+                            <h4>Timbangan Pasar / Bebek</h4>
+                            <p>Menggunakan anak timbangan untuk buah, sayur, & telur.</p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">🔢</div>
+                            <h4>Timbangan Digital</h4>
+                            <p>Menampilkan angka presisi di layar elektronik.</p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">🎂</div>
+                            <h4>Timbangan Kue</h4>
+                            <p>Kapasitas kecil untuk bahan kue (tepung, mentega).</p>
+                        </div>
+                    </div>
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Ibu ingin menimbang 250 gram mentega untuk membuat kue. Timbangan apa yang paling praktis?</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. Timbangan Badan</button>
+                            <button onclick="checkMini(this, true)">B. Timbangan Kue</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="materi-badge">Materi 2</span>
+                    <h3>Hubungan Antarsatuan Berat (kg, g, Ons, Pon)</h3>
+                    <div class="formula-box">
+                        <p>📦 <strong>1 kilogram (kg) = 1.000 gram (g)</strong></p>
+                        <p>🍊 <strong>1 kilogram (kg) = 10 ons</strong> (1 ons = 100 gram)</p>
+                        <p>🥖 <strong>1 kilogram (kg) = 2 pon</strong> (1 pon = 500 gram)</p>
+                    </div>
+                    <div class="example-box">
+                        <ul>
+                            <li>2 kg = 2 x 1.000 g = <strong>2.000 g</strong></li>
+                            <li>3 kg 200 g = 3.000 g + 200 g = <strong>3.200 g</strong></li>
+                            <li>4 ons = 4 x 100 g = <strong>400 g</strong></li>
+                            <li>2 pon = 2 x 500 g = <strong>1.000 g = 1 kg</strong></li>
+                        </ul>
+                    </div>
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Ayah membeli 3 kg apel. Berapa gramkah berat apel tersebut?</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. 300 g</button>
+                            <button onclick="checkMini(this, true)">B. 3.000 g</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="materi-badge">Materi 3</span>
+                    <h3>Pembulatan Hasil Pengukuran Berat</h3>
+                    <p>Aturan pembulatan sama dengan desimal biasa (kurang dari 5 bulatkan ke bawah, 5 atau lebih bulatkan ke atas):</p>
+                    <div class="example-box">
+                        <p>🍉 Timbangan semangka 2,4 kg ➔ Dibulatkan jadi <strong>2 kg</strong>.</p>
+                        <p>🌾 Timbangan beras 4,8 kg ➔ Dibulatkan jadi <strong>5 kg</strong>.</p>
+                    </div>
+                    <div class="mini-check">
+                        <strong>🔍 Mini Check Kiko:</strong>
+                        <p>Penimbangan seekor ayam menunjukkan angka 1,5 kg. Pembulatan ke kg terdekat adalah...</p>
+                        <div class="mini-check-options">
+                            <button onclick="checkMini(this, false)">A. 1 kg</button>
+                            <button onclick="checkMini(this, true)">B. 2 kg</button>
+                        </div>
+                        <div class="mini-feedback"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB MATERI C: SOAL CERITA -->
+            <div id="tab-cerita" class="tab-content">
+                <div class="card">
+                    <h3>💡 Strategi 3 Langkah Penyelesaian Soal Cerita</h3>
+                    <div class="grid-3col">
+                        <div class="materi-item-box">
+                            <div class="item-emoji">1️⃣</div>
+                            <h4>Samakan Satuan</h4>
+                            <p>Ubah semua ke satuan yang ditanyakan.</p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">2️⃣</div>
+                            <h4>Hitung</h4>
+                            <p>Lakukan operasi penjumlahan (+) atau pengurangan (-).</p>
+                        </div>
+                        <div class="materi-item-box">
+                            <div class="item-emoji">3️⃣</div>
+                            <h4>Hasil Akhir</h4>
+                            <p>Sajikan jawaban beserta satuannya.</p>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <h4>Contoh Soal Cerita:</h4>
+                        <p><em>"Ibu membeli 2 kg gula pasir dan 700 gram tepung terigu. Berapa gram total belanjaan Ibu?"</em></p>
+                        <hr style="margin: 8px 0;">
+                        <p><strong>Penyelesaian:</strong></p>
+                        <ol style="margin-left: 20px;">
+                            <li>Ubah 2 kg ke gram ➔ 2 kg = 2.000 gram.</li>
+                            <li>Tepung terigu sudah dalam gram ➔ 700 gram.</li>
+                            <li>Jumlahkan: 2.000 g + 700 g = <strong>2.700 gram</strong>.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN D: AKTIVITAS BELAJAR (5 MINI GAMES) -->
+        <section id="sec-aktivitas" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            <h2>🎮 Aktivitas Belajar Interaktif</h2>
+            <br>
+
+            <div class="game-nav">
+                <button class="game-tab-btn active" onclick="loadGameModule(1)">Modul 1: Sortir Benda</button>
+                <button class="game-tab-btn" onclick="loadGameModule(2)">Modul 2: Jembatan Konversi</button>
+                <button class="game-tab-btn" onclick="loadGameModule(3)">Modul 3: Detektif Skala</button>
+                <button class="game-tab-btn" onclick="loadGameModule(4)">Modul 4: Kasir Cilik</button>
+                <button class="game-tab-btn" onclick="loadGameModule(5)">Modul 5: Ayo Berpikir!</button>
+            </div>
+
+            <div id="gameContainer" class="card">
+                <!-- Content Injected via JS -->
+            </div>
+        </section>
+
+        <!-- HALAMAN E: KUIS EVALUASI -->
+        <section id="sec-kuis" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            
+            <div class="card">
+                <div class="quiz-header">
+                    <span id="quizProgressText" style="font-weight: 800; color: var(--soft-orange);">Soal 1 dari 10</span>
+                    <div class="progress-bar-bg" style="width: 150px;">
+                        <div id="quizProgressBar" class="progress-bar-fill" style="width: 10%;"></div>
+                    </div>
+                </div>
+
+                <div id="quizBody">
+                    <h3 id="quizQuestion" style="font-family: 'Fredoka', sans-serif;">Pertanyaan Kuis...</h3>
+                    <div id="quizOptions" class="quiz-options-grid">
+                        <!-- Options Injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Result Area -->
+                <div id="quizResultArea" style="display: none; text-align: center;">
+                    <span style="font-size: 4rem;">🏆</span>
+                    <h2 style="font-family: 'Fredoka', sans-serif; color: var(--soft-orange);">Misi Selesai!</h2>
+                    <p>Skor Akhir Kamu: <strong id="resultScore" style="font-size: 2rem; color: var(--mint-green);">0</strong> / 100</p>
+                    <p id="resultBadgeText" style="font-weight: 700; margin: 10px 0;"></p>
+                    <br>
+                    <button class="btn-3d btn-yellow" onclick="showQuizReview()">🔍 Lihat Pembahasan Soal</button>
+                    <button class="btn-3d btn-blue" onclick="restartQuiz()">🔄 Ulangi Kuis</button>
+                </div>
+
+                <!-- Review Area -->
+                <div id="quizReviewArea" style="display: none;">
+                    <h3>🔍 Pembahasan Soal Evaluasi</h3>
+                    <br>
+                    <div id="reviewList"></div>
+                    <br>
+                    <button class="btn-3d btn-yellow" onclick="navigateTo('rapor')">Lihat Rapor Belajar 🏆</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN F: RAPOR & BADGES -->
+        <section id="sec-rapor" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <span id="raporAvatar" style="font-size: 3.5rem;">🐱</span>
+                    <div>
+                        <h2 id="raporNama" style="font-family: 'Fredoka', sans-serif;">Nama Siswa</h2>
+                        <p id="raporKelas">Kelas 4</p>
+                    </div>
+                </div>
+                <hr style="margin: 16px 0;">
+                <div style="display: flex; justify-content: space-around; text-align: center;">
+                    <div>
+                        <span>Skor Kuis</span>
+                        <h2 id="raporSkor" style="color: var(--mint-green); font-family: 'Fredoka', sans-serif;">-</h2>
+                    </div>
+                    <div>
+                        <span>Status</span>
+                        <h3 id="raporStatus" style="color: var(--sky-blue); font-family: 'Fredoka', sans-serif;">-</h3>
+                    </div>
+                </div>
+                <hr style="margin: 16px 0;">
+                <h3>🎖️ Lencana Pencapaian:</h3>
+                <div id="raporBadges" class="badges-container">
+                    <div class="badge-card" id="badgeSilver">
+                        <span class="badge-icon">🥈</span>
+                        <h4>Detektif Ukur Silver</h4>
+                        <small>Skor ≥ 70</small>
+                    </div>
+                    <div class="badge-card" id="badgeGold">
+                        <span class="badge-icon">🥇</span>
+                        <h4>Master Ukur Gold</h4>
+                        <small>Skor 100</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HALAMAN G: PETUNJUK -->
+        <section id="sec-petunjuk" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            <div class="card">
+                <h2>💡 Petunjuk Penggunaan Media</h2>
+                <br>
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li><strong>Layar Awal:</strong> Masukkan namamu, pilih kelas, dan pilih avatar favoritmu!</li>
+                    <li><strong>Modul Materi:</strong> Pelajari Pengukuran Panjang, Berat, dan Soal Cerita. Jangan lupa jawab <em>Mini Check</em>!</li>
+                    <li><strong>Aktivitas Belajar:</strong> Mainkan 5 Mini Games interaktif untuk melatih pemahamanmu.</li>
+                    <li><strong>Kuis Evaluasi:</strong> Jawab 10 soal HOTS untuk menguji kemampuanmu dan raih lencana pencapaian!</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- HALAMAN H: TENTANG MEDIA -->
+        <section id="sec-tentang" class="spa-section">
+            <button class="btn-back" onclick="navigateTo('dashboard')">⬅️ Kembali ke Dashboard</button>
+            <div class="card">
+                <h2>ℹ️ Tentang Media Pembelajaran</h2>
+                <br>
+                <p>Media pembelajaran berbasis web **Misi Ukur Bersama Si Kiko** dirancang khusus untuk siswa Kelas IV SD/MI berdasarkan Kurikulum Merdeka pada materi Pengukuran Panjang dan Berat.</p>
+                <br>
+                <p><strong>Spesifikasi & Fitur:</strong></p>
+                <ul>
+                    <li>100% Vanilla HTML5, CSS3, JavaScript ES6.</li>
+                    <li>Sistem Single Page Application (SPA) responsif & interaktif.</li>
+                    <li>Penyimpanan otomatis nilai & identitas siswa via LocalStorage API.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POPUP FEEDBACK -->
+    <div id="feedbackModal" class="modal-overlay">
+        <div class="modal-card">
+            <span id="modalIcon" class="modal-icon">⭐</span>
+            <h2 id="modalTitle" style="font-family: 'Fredoka', sans-serif;">Luar Biasa!</h2>
+            <p id="modalMessage">Jawabanmu tepat sekali!</p>
+            <br>
+            <button class="btn-3d btn-yellow" onclick="closeModal()">Lanjut 🚀</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC ENGINE -->
+    <script>
+        /* ===================================================
+           STATE MANAGEMENT & DATA
+           =================================================== */
+        let soundEnabled = true;
+        let currentUser = {
+            nama: '',
+            kelas: '4A',
+            avatar: '🐱',
+            skorKuis: null
+        };
+
+        // 10 SOAL HOTS & KONTEKSTUAL EVALUASI
+        const quizData = [
+            {
+                q: "1. Budi mengukur panjang meja kelas menggunakan meteran saku. Hasilnya adalah 2 m 45 cm. Panjang meja tersebut jika diubah seluruhnya ke dalam sentimeter (cm) adalah...",
+                options: ["A. 245 cm", "B. 200 cm", "C. 450 cm", "D. 2.450 cm"],
+                answer: 0,
+                explain: "2 m = 200 cm. Jadi 2 m 45 cm = 200 cm + 45 cm = 245 cm."
+            },
+            {
+                q: "2. Panjang sebuah pensil saat diukur dengan penggaris menunjukkan angka 8,3 cm. Jika dibulatkan ke sentimeter terdekat, panjang pensil adalah...",
+                options: ["A. 8 cm", "B. 9 cm", "C. 8,5 cm", "D. 10 cm"],
+                answer: 0,
+                explain: "Angka di belakang koma adalah 3 (< 5), maka dibulatkan ke bawah menjadi 8 cm."
+            },
+            {
+                q: "3. Tinggi tiang bendera sekolah adalah 4 m. Berapakah tinggi tiang bendera tersebut dalam sentimeter (cm)?",
+                options: ["A. 40 cm", "B. 400 cm", "C. 4.000 cm", "D. 40.000 cm"],
+                answer: 1,
+                explain: "1 m = 100 cm. Maka 4 m = 4 x 100 = 400 cm."
+            },
+            {
+                q: "4. Ayah membeli 3 kg apel di pasar tradisional. Berat apel tersebut jika diubah ke dalam satuan gram adalah...",
+                options: ["A. 300 g", "B. 3.000 g", "C. 30.000 g", "D. 30 g"],
+                answer: 1,
+                explain: "1 kg = 1.000 g. Maka 3 kg = 3 x 1.000 = 3.000 g."
+            },
+            {
+                q: "5. Hasil penimbangan seekor ayam di pasar menunjukkan angka 1,5 kg. Pembulatan ke kilogram terdekat adalah...",
+                options: ["A. 1 kg", "B. 2 kg", "C. 1,5 kg", "D. 3 kg"],
+                answer: 1,
+                explain: "Angka di belakang koma adalah 5 (≥ 5), maka dibulatkan ke atas menjadi 2 kg."
+            },
+            {
+                q: "6. Ibu membeli 4 ons mentega untuk bahan membuat kue. Berat mentega tersebut sama dengan...",
+                options: ["A. 40 gram", "B. 400 gram", "C. 4.000 gram", "D. 4 gram"],
+                answer: 1,
+                explain: "1 ons = 100 gram. Maka 4 ons = 4 x 100 = 400 gram."
+            },
+            {
+                q: "7. Gambar jarum timbangan kue menunjukkan angka 420 gram tepung terigu. Pembulatan ke ratusan gram terdekat adalah...",
+                options: ["A. 400 g", "B. 500 g", "C. 450 g", "D. 420 g"],
+                answer: 0,
+                explain: "Puluhan angka 20 (< 50), sehingga dibulatkan ke bawah menjadi 400 gram."
+            },
+            {
+                q: "8. Budi membeli pita sepanjang 2 m. Ia memotong pita sepanjang 80 cm. Berapa cm sisa pita Budi?",
+                options: ["A. 120 cm", "B. 180 cm", "C. 100 cm", "D. 150 cm"],
+                answer: 0,
+                explain: "2 m = 200 cm. Sisa pita = 200 cm - 80 cm = 120 cm."
+            },
+            {
+                q: "9. Kakak membawa 2 pon mentega, sedangkan Ayah membawa 1 kg minyak. Pernyataan yang benar adalah...",
+                options: ["A. Belanjaan Kakak lebih berat", "B. Belanjaan Ayah lebih berat", "C. Berat belanjaan Kakak dan Ayah sama berat", "D. Tidak bisa dibandingkan"],
+                answer: 2,
+                explain: "2 pon = 2 x 500 g = 1.000 g = 1 kg. Jadi keduanya sama berat!"
+            },
+            {
+                q: "10. Mengapa penjahit lebih memilih meteran kain dibanding penggaris mika plastik untuk mengukur lingkar pinggang?",
+                options: [
+                    "A. Karena meteran kain harganya lebih murah",
+                    "B. Karena meteran kain lentur/fleksibel mengikuti bentuk tubuh",
+                    "C. Karena penggaris plastik terlalu panjang",
+                    "D. Karena meteran kain terbuat dari kayu"
+                ],
+                answer: 1,
+                explain: "Meteran kain bersifat lentur sehingga mudah melingkar pada bidang melengkung/tubuh manusia."
+            }
+        ];
+
+        let currentQuizIdx = 0;
+        let userAnswers = [];
+
+        /* ===================================================
+           SOUND EFFECT SYNTHESIS (HTML5 AUDIO API)
+           =================================================== */
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, ctx.currentTime + 0.1); // E5
+                    gain.gain.fadeOut(ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime);
+                    osc.frequency.setValueAtTime(180, ctx.currentTime + 0.15);
+                    gain.gain.fadeOut(ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch (e) {
+                // AudioContext fallback
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('soundIcon').textContent = soundEnabled ? "🔊" : "🔇";
+        }
+
+        /* ===================================================
+           NAVIGATION SPA
+           =================================================== */
+        function navigateTo(sectionId) {
+            document.querySelectorAll('.spa-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById(`sec-${sectionId}`);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo(0, 0);
+            }
+        }
+
+        /* ===================================================
+           USER LOGIC & LOCALSTORAGE
+           =================================================== */
+        function handleLogin(e) {
+            e.preventDefault();
+            currentUser.nama = document.getElementById('inputNama').value.trim();
+            currentUser.kelas = document.getElementById('selectKelas').value;
+            currentUser.avatar = document.querySelector('input[name="avatar"]:checked').value;
+
+            saveUserData();
+            updateUIHeaderAndDash();
+            navigateTo('dashboard');
+            playSound('correct');
+        }
+
+        function saveUserData() {
+            localStorage.setItem('misi_ukur_kiko_user', JSON.stringify(currentUser));
+        }
+
+        function loadUserData() {
+            const data = localStorage.getItem('misi_ukur_kiko_user');
+            if (data) {
+                currentUser = JSON.parse(data);
+                updateUIHeaderAndDash();
+                navigateTo('dashboard');
+            }
+        }
+
+        function updateUIHeaderAndDash() {
+            if (!currentUser.nama) return;
+            document.getElementById('dashUserName').textContent = currentUser.nama;
+            document.getElementById('dashUserAvatar').textContent = currentUser.avatar;
+
+            document.getElementById('raporNama').textContent = currentUser.nama;
+            document.getElementById('raporKelas').textContent = `Kelas ${currentUser.kelas}`;
+            document.getElementById('raporAvatar').textContent = currentUser.avatar;
+
+            if (currentUser.skorKuis !== null) {
+                document.getElementById('dashProgressFill').style.width = `${currentUser.skorKuis}%`;
+                document.getElementById('dashProgressText').textContent = `Skor Terakhir: ${currentUser.skorKuis}/100`;
+                document.getElementById('raporSkor').textContent = currentUser.skorKuis;
+                
+                const isLulus = currentUser.skorKuis >= 70;
+                document.getElementById('raporStatus').textContent = isLulus ? "LULUS 🟢" : "BELAJAR LAGI 🟡";
+
+                if (currentUser.skorKuis >= 70) document.getElementById('badgeSilver').classList.add('unlocked');
+                if (currentUser.skorKuis === 100) document.getElementById('badgeGold').classList.add('unlocked');
+            }
+        }
+
+        /* ===================================================
+           MATERI TAB SYSTEM & MINI CHECK
+           =================================================== */
+        function switchMateriTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        function checkMini(btn, isCorrect) {
+            const feedback = btn.closest('.mini-check').querySelector('.mini-feedback');
+            if (isCorrect) {
+                playSound('correct');
+                feedback.innerHTML = "<span style='color: var(--mint-green);'>✅ Hebat Sekali! Jawabanmu Benar!</span>";
+                showModal("🎉 Bintang Untukmu!", "Jawaban Mini Check kamu sangat tepat!");
+            } else {
+                playSound('wrong');
+                feedback.innerHTML = "<span style='color: var(--soft-orange);'>❌ Coba lagi ya, pasti kamu bisa!</span>";
+            }
+        }
+
+        /* ===================================================
+           5 MINI GAMES ENGINE (ACTIVITIES)
+           =================================================== */
+        function loadGameModule(modId) {
+            document.querySelectorAll('.game-tab-btn').forEach((b, idx) => {
+                b.classList.toggle('active', idx === modId - 1);
+            });
+
+            const container = document.getElementById('gameContainer');
+            if (modId === 1) {
+                container.innerHTML = `
+                    <h3>Modul 1: Sortir Benda & Alat Ukur</h3>
+                    <p>Klik kartu benda untuk memindahkannya ke tempat alat ukur yang tepat!</p>
+                    
+                    <div class="drag-items-container" id="sortItemsArea">
+                        <div class="draggable-card" onclick="moveItem(this, 'penggaris')">📐 Buku Tulis</div>
+                        <div class="draggable-card" onclick="moveItem(this, 'timbangan')">🌾 Sekarung Beras 5 kg</div>
+                        <div class="draggable-card" onclick="moveItem(this, 'meteran_saku')">🚪 Panjang Pintu Kelas</div>
+                        <div class="draggable-card" onclick="moveItem(this, 'meteran_kain')">👖 Lingkar Pinggang</div>
+                    </div>
+
+                    <div class="drop-baskets-grid">
+                        <div class="drop-basket" id="basket-penggaris"><strong>Penggaris</strong></div>
+                        <div class="drop-basket" id="basket-timbangan"><strong>Timbangan</strong></div>
+                        <div class="drop-basket" id="basket-meteran_saku"><strong>Meteran Saku</strong></div>
+                        <div class="drop-basket" id="basket-meteran_kain"><strong>Meteran Kain</strong></div>
+                    </div>
+                `;
+            } else if (modId === 2) {
+                container.innerHTML = `
+                    <h3>Modul 2: Jembatan Konversi</h3>
+                    <p>Klik dua kartu yang nilainya sama/setara!</p>
+                    <br>
+                    <div class="grid-3col">
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '3m')">3 m</button>
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '3m')">300 cm</button>
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '2kg')">2 kg</button>
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '2kg')">2.000 g</button>
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '1pon')">500 g</button>
+                        <button class="btn-3d btn-blue" onclick="matchCards(this, '1pon')">1 pon</button>
+                    </div>
+                `;
+            } else if (modId === 3) {
+                container.innerHTML = `
+                    <h3>Modul 3: Detektif Skala</h3>
+                    <p>Soal 1: Pensil diukur dengan penggaris menunjukkan angka <strong>6,8 cm</strong>. Hasil pembulatan ke cm terdekat adalah...</p>
+                    <br>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(false)">A. 6 cm</button>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(true)">B. 7 cm</button>
+                `;
+            } else if (modId === 4) {
+                container.innerHTML = `
+                    <h3>Modul 4: Kasir Cilik</h3>
+                    <p>Skenario: Ibu membeli 1 kg telur dan 500 gram gula. Berapa gram total belanjaan Ibu?</p>
+                    <br>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(true)">A. 1.500 g</button>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(false)">B. 600 g</button>
+                `;
+            } else if (modId === 5) {
+                container.innerHTML = `
+                    <h3>Modul 5: Ayo Berpikir!</h3>
+                    <p>Kasus: Mengapa meteran kain paling cocok untuk mengukur keliling batang pohon?</p>
+                    <br>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(true)">A. Karena meteran kain fleksibel/lentur</button>
+                    <button class="btn-3d btn-yellow" onclick="answerGame(false)">B. Karena penggaris plastik terlalu panjang</button>
+                `;
+            }
+        }
+
+        function moveItem(el, targetKey) {
+            const basket = document.getElementById(`basket-${targetKey}`);
+            if (basket) {
+                basket.appendChild(el);
+                playSound('correct');
+            }
+        }
+
+        let firstMatch = null;
+        function matchCards(btn, key) {
+            if (!firstMatch) {
+                firstMatch = { btn, key };
+                btn.style.opacity = '0.5';
+            } else {
+                if (firstMatch.key === key && firstMatch.btn !== btn) {
+                    btn.style.backgroundColor = 'var(--mint-green)';
+                    firstMatch.btn.style.backgroundColor = 'var(--mint-green)';
+                    playSound('correct');
+                    showModal("🎉 Pasangan Serasi!", "Kamu menemukan pasangan nilai yang setara!");
+                } else {
+                    firstMatch.btn.style.opacity = '1';
+                    playSound('wrong');
+                }
+                firstMatch = null;
+            }
+        }
+
+        function answerGame(isCorrect) {
+            if (isCorrect) {
+                playSound('correct');
+                showModal("🎉 Jawaban Tepat!", "Luar biasa, analisis kamu sangat hebat!");
+            } else {
+                playSound('wrong');
+                showModal("❌ Coba Lagi!", "Pelajari lagi materinya ya!");
+            }
+        }
+
+        /* ===================================================
+           KUIS EVALUASI ENGINE
+           =================================================== */
+        function renderQuizQuestion() {
+            if (currentQuizIdx >= quizData.length) {
+                finishQuiz();
+                return;
+            }
+
+            const q = quizData[currentQuizIdx];
+            document.getElementById('quizProgressText').textContent = `Soal ${currentQuizIdx + 1} dari ${quizData.length}`;
+            document.getElementById('quizProgressBar').style.width = `${((currentQuizIdx + 1) / quizData.length) * 100}%`;
+            document.getElementById('quizQuestion').textContent = q.q;
+
+            const optContainer = document.getElementById('quizOptions');
+            optContainer.innerHTML = '';
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-opt-btn';
+                btn.textContent = optText;
+                btn.onclick = () => answerQuiz(idx);
+                optContainer.appendChild(btn);
+            });
+        }
+
+        function answerQuiz(optionIdx) {
+            userAnswers[currentQuizIdx] = optionIdx;
+            currentQuizIdx++;
+            renderQuizQuestion();
+        }
+
+        function restartQuiz() {
+            currentQuizIdx = 0;
+            userAnswers = [];
+            document.getElementById('quizBody').style.display = 'block';
+            document.getElementById('quizResultArea').style.display = 'none';
+            document.getElementById('quizReviewArea').style.display = 'none';
+            renderQuizQuestion();
+        }
+
+        function finishQuiz() {
+            document.getElementById('quizBody').style.display = 'none';
+            document.getElementById('quizResultArea').style.display = 'block';
+
+            let score = 0;
+            quizData.forEach((q, idx) => {
+                if (userAnswers[idx] === q.answer) {
+                    score += 10;
+                }
+            });
+
+            currentUser.skorKuis = score;
+            saveUserData();
+            updateUIHeaderAndDash();
+
+            document.getElementById('resultScore').textContent = score;
+            const badgeText = document.getElementById('resultBadgeText');
+            if (score === 100) {
+                badgeText.textContent = "🥇 Luar Biasa! Kamu meraih Lencana Master Ukur Gold!";
+            } else if (score >= 70) {
+                badgeText.textContent = "🥈 Hebat! Kamu meraih Lencana Detektif Ukur Silver!";
+            } else {
+                badgeText.textContent = "🥉 Jangan berkecil hati, ayo pelajari lagi materinya!";
+            }
+        }
+
+        function showQuizReview() {
+            document.getElementById('quizResultArea').style.display = 'none';
+            document.getElementById('quizReviewArea').style.display = 'block';
+
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = '';
+
+            quizData.forEach((q, idx) => {
+                const isCorrect = userAnswers[idx] === q.answer;
+                const div = document.createElement('div');
+                div.style.marginBottom = '14px';
+                div.style.padding = '12px';
+                div.style.borderRadius = '12px';
+                div.style.background = isCorrect ? '#E8F8F5' : '#FFEBEB';
+
+                div.innerHTML = `
+                    <strong>Soal ${idx + 1}: ${isCorrect ? '✅ Benar' : '❌ Salah'}</strong>
+                    <p>${q.q}</p>
+                    <small>Jawabanmu: ${q.options[userAnswers[idx]] || '-'}</small><br>
+                    <small><strong>Jawaban Benar: ${q.options[q.answer]}</strong></small>
+                    <p style="margin-top: 4px;"><em>💡 ${q.explain}</em></p>
+                `;
+                reviewList.appendChild(div);
+            });
+        }
+
+        /* ===================================================
+           MODAL CONTROL
+           =================================================== */
+        function showModal(title, msg) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = msg;
+            document.getElementById('feedbackModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('feedbackModal').style.display = 'none';
+        }
+
+        // Init App
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserData();
+            loadGameModule(1);
+            renderQuizQuestion();
+        });
+    </script>
+</body>
+</html>
